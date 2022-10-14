@@ -48,7 +48,7 @@
 
 @implementation EaseChatViewController
 
-+ (EaseChatViewController *)initWithConversationId:(NSString *)aConversationId
++ (EaseChatViewController *)createWithConversationId:(NSString *)aConversationId
                       conversationType:(EMConversationType)aType
                          chatViewModel:(EaseChatViewModel *)aModel
 {
