@@ -31,7 +31,7 @@
 - (CGFloat)cellLonger
 {
     if (_type == ExtTypeChatBar) {
-        return 55;
+        return 80;
     }
     return 50;
 }
@@ -41,7 +41,7 @@
 }
 - (CGFloat)yOffset
 {
-    return (self.collectionViewSize.height - (self.cellLonger + 18) * self.columCount) / (self.columCount + 1);
+    return (self.collectionViewSize.height - (self.cellLonger + 27) * self.columCount) / (self.columCount + 1);
 }
 - (CGSize)collectionViewSize
 {
@@ -53,7 +53,7 @@
 - (NSInteger)rowCount
 {
     if (_type == ExtTypeChatBar) {
-        return 4;
+        return 3;
     }
     return _itemCount > 6 ? 6 : _itemCount;
 }
@@ -64,12 +64,12 @@
     }
     return _itemCount > 6 ? 2 : 1;
 }
-- (CGFloat)fontSize
+- (UIFont *)font
 {
     if (_type == ExtTypeChatBar) {
-        return _extFuncMode.fontSize;
+        return _extFuncMode.font;
     }
-    return 12;
+    return [UIFont systemFontOfSize:12];
 }
 - (UIColor *)fontColor
 {
@@ -131,7 +131,7 @@
     self.backgroundColor = _menuViewModel.bgColor;
     
     HorizontalLayout *layout = [[HorizontalLayout alloc] initWithOffset:_menuViewModel.xOffset yOffset:_menuViewModel.yOffset];
-    layout.itemSize = CGSizeMake(_menuViewModel.cellLonger, _menuViewModel.cellLonger + 23.f);
+    layout.itemSize = CGSizeMake(_menuViewModel.cellLonger, _menuViewModel.cellLonger + 25.f);
     layout.rowCount = _menuViewModel.rowCount;
     layout.columCount = _menuViewModel.columCount;
     self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, _menuViewModel.collectionViewSize.width, _menuViewModel.collectionViewSize.height) collectionViewLayout:layout];
@@ -223,7 +223,7 @@
 - (void)personalizeToolbar:(EaseExtMenuModel*)menuItemModel menuViewMode:(EaseExtMenuViewModel*)menuViewModel {
     _menuItemModel = menuItemModel;
     self.toolLabel.textColor = menuViewModel.fontColor;
-    [self.toolLabel setFont:[UIFont systemFontOfSize:menuViewModel.fontSize]];
+    [self.toolLabel setFont:menuViewModel.font];
     self.toolBtn.backgroundColor = menuViewModel.iconBgColor;
     [self.toolLabel setText:_menuItemModel.funcDesc];
     [self.toolBtn setImage:_menuItemModel.icon forState:UIControlStateNormal];

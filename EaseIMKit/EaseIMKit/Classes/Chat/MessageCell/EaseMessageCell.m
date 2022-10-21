@@ -119,7 +119,7 @@
         _avatarView.layer.cornerRadius = avatarLonger / 2;
     }
     if (_viewModel.avatarStyle != Rectangular) {
-        _avatarView.clipsToBounds = _avatarView.clipsToBounds = YES;;
+        _avatarView.clipsToBounds = _avatarView.clipsToBounds = YES;
     }
     [self.contentView addSubview:_avatarView];
     if (self.direction == EMMessageDirectionReceive) {
@@ -141,10 +141,11 @@
             }];
         }
     } else {
+        [_avatarView setHidden: YES];
         [_avatarView Ease_makeConstraints:^(EaseConstraintMaker *make) {
             make.top.equalTo(self.contentView).offset(15);
             make.right.equalTo(self.contentView).offset(-2*componentSpacing);
-            make.width.height.equalTo(@(avatarLonger));
+            make.width.height.equalTo(@0);
         }];
     }
 

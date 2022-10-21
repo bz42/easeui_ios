@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UIColor *iconBgColor;//图标背景色
 @property (nonatomic, strong) UIColor *viewBgColor;//视图背景色
 @property (nonatomic, strong) UIColor *fontColor;//字体颜色
-@property (nonatomic, assign) CGFloat fontSize;//字体大小
+@property (nonatomic, strong) UIFont *font;//字体
 @property (nonatomic, assign) CGSize collectionViewSize;//视图尺寸
 
 @end

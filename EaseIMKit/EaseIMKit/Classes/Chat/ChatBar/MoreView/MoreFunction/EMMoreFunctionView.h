@@ -27,7 +27,7 @@ typedef NS_ENUM(NSInteger, ExtType) {
 @property (nonatomic, assign) NSInteger rowCount;
 @property (nonatomic, assign) NSInteger columCount;
 @property (nonatomic, assign) CGSize collectionViewSize;
-@property (nonatomic, assign) CGFloat fontSize;
+@property (nonatomic, strong) UIFont *font;
 @property (nonatomic, strong) UIColor *bgColor;
 @property (nonatomic, strong) UIColor *fontColor;
 @property (nonatomic, strong) UIColor *iconBgColor;//图标背景色

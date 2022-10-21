@@ -40,8 +40,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UIColor *msgTimeItemFontColor; //时间线字体颜色
 @property (nonatomic, strong) UIImage *receiveBubbleBgPicture; //所接收信息的气泡
 @property (nonatomic, strong) UIImage *sendBubbleBgPicture; //所发送信息的气泡
-@property (nonatomic, strong) UIColor *contentFontColor; //文本消息字体颜色
-@property (nonatomic) CGFloat contentFontSize;  //文本消息字体大小
+@property (nonatomic, strong) UIColor *receiveFontColor; //所接收信息文本消息字体颜色
+@property (nonatomic, strong) UIColor *sendFontColor; //所发送信息文本消息字体颜色
+@property (nonatomic, copy) UIFont *contentFont;  //文本消息字体
 @property (nonatomic) UIEdgeInsets bubbleBgEdgeInset; //消息气泡背景图保护区域
 @property (nonatomic) EaseInputBarStyle inputBarStyle; //输入区类型：(全部功能，无语音，无表情，无表情和语音，纯文本)
 @property (nonatomic) EaseAvatarStyle avatarStyle; //头像风格

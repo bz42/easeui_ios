@@ -27,6 +27,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) EaseChatBarEmoticonView *moreEmoticonView;
 @property (nonatomic, strong) EMMoreFunctionView *moreFunctionView;
 
+@property (nonatomic, readonly, strong) UIButton *conversationToolBarBtn;//更多
+@property (nonatomic, readonly, strong) UIButton *emojiButton;//表情
+@property (nonatomic, readonly, strong) UIButton *audioButton;//语音
+
 - (instancetype)initWithViewModel:(EaseChatViewModel *)viewModel;
 
 - (void)clearInputViewText;

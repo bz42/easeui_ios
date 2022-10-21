@@ -22,7 +22,7 @@
     [super setupToolbar];
     self.toolBtn = [[UIButton alloc]init];
     self.toolBtn.layer.masksToBounds = YES;
-    self.toolBtn.layer.cornerRadius = 8;
+    self.toolBtn.layer.cornerRadius = 15;
     self.toolBtn.userInteractionEnabled = NO;
     [self.contentView addSubview:self.toolBtn];
     [self.toolBtn Ease_makeConstraints:^(EaseConstraintMaker *make) {
@@ -36,16 +36,21 @@
     self.toolLabel.textAlignment = NSTextAlignmentCenter;
     [self.contentView addSubview:self.toolLabel];
     [self.toolLabel Ease_makeConstraints:^(EaseConstraintMaker *make) {
-        make.top.equalTo(self.toolBtn.ease_bottom).offset(3);
         make.width.Ease_equalTo(@(self.cellLonger));
         make.left.equalTo(self.contentView);
-        make.bottom.equalTo(self.contentView).offset(-10);
+        make.bottom.equalTo(self.contentView);
     }];
 }
 
 - (void)personalizeToolbar:(EaseExtMenuModel*)menuItemModel menuViewMode:(EaseExtMenuViewModel*)menuViewModel
 {
     [super personalizeToolbar:menuItemModel menuViewMode:menuViewModel];
+    if(menuItemModel.iconView && menuItemModel.iconView.superview == nil) {
+        [self.contentView addSubview: menuItemModel.iconView];
+        [menuItemModel.iconView Ease_makeConstraints:^(EaseConstraintMaker *make) {
+            make.edges.equalTo(self.toolBtn);
+        }];
+    }
 }
 
 @end

@@ -15,6 +15,7 @@ typedef void(^menuItemDidSelectedHandle)(NSString* itemDesc, BOOL isExecuted);
 
 - (instancetype)initWithData:(UIImage *)icon funcDesc:(NSString *)funcDesc handle:(menuItemDidSelectedHandle)menuItemHandle;
 
+@property (nullable, nonatomic, strong) UIView *iconView; //图标
 @property (nonatomic, strong) UIImage *icon; //图标
 @property (nonatomic, strong) NSString *funcDesc; //功能描述
 @property (nonatomic, strong) menuItemDidSelectedHandle itemDidSelectedHandle;

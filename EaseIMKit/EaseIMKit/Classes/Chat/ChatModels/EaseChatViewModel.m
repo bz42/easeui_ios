@@ -23,8 +23,9 @@
         _receiveBubbleBgPicture = [UIImage easeUIImageNamed:@"msg_bg_recv"];
         _sendBubbleBgPicture = [UIImage easeUIImageNamed:@"msg_bg_send"];
         _bubbleBgEdgeInset = UIEdgeInsetsMake(8, 8, 8, 8);
-        _contentFontColor = [UIColor blackColor];
-        _contentFontSize = 18.f;
+        _sendFontColor = [UIColor blackColor];
+        _receiveFontColor = [UIColor blackColor];
+        _contentFont = [UIFont systemFontOfSize: 16];
         _inputBarStyle = EaseInputBarStyleAll;
         _avatarStyle = RoundedCorner;
         _avatarCornerRadius = 0;
@@ -86,17 +87,24 @@
     _bubbleBgEdgeInset = bubbleBgEdgeInset;
 }
 
-- (void)setContentFontColor:(UIColor *)contentFontColor
+- (void)setSendFontColor:(UIColor *)sendFontColor
 {
-    if (contentFontColor) {
-        _contentFontColor = contentFontColor;
+    if (sendFontColor) {
+        _sendFontColor = sendFontColor;
     }
 }
 
-- (void)setContentFontSize:(CGFloat)contentFontSize
+- (void)setReceiveFontColor:(UIColor *)receiveFontColor
 {
-    if (contentFontSize > 0) {
-        _contentFontSize = contentFontSize;
+    if (receiveFontColor) {
+        _receiveFontColor = receiveFontColor;
+    }
+}
+
+- (void)setContentFont:(UIFont *)contentFont
+{
+    if (contentFont > 0) {
+        _contentFont = contentFont;
     }
 }
 

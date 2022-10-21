@@ -10,7 +10,7 @@
 #import "UIImage+EaseUI.h"
 #import "UIColor+EaseUI.h"
 
-#define kTextViewMinHeight 32
+#define kTextViewMinHeight 30
 #define kTextViewMaxHeight 80
 #define kIconwidth 22
 #define kModuleMargin 10
@@ -53,8 +53,8 @@
 {
     self.backgroundColor = _viewModel.chatBarBgColor;
     UIView *line = [[UIView alloc] init];
-    line.backgroundColor = [UIColor colorWithHexString:@"#000000"];
-    line.alpha = 0.1;
+    line.backgroundColor = [UIColor colorWithHexString:@"#f2f2f2"];;
+    line.alpha = 1;
     [self addSubview:line];
     [line Ease_makeConstraints:^(EaseConstraintMaker *make) {
         make.top.equalTo(self);
@@ -69,10 +69,9 @@
     [_audioButton addTarget:self action:@selector(audioButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:self.audioButton];
     [_audioButton Ease_makeConstraints:^(EaseConstraintMaker *make) {
-        make.top.equalTo(self).offset(10);
-        make.left.equalTo(self).offset(16);
-        make.width.Ease_equalTo(@16);
-        make.height.Ease_equalTo(kIconwidth);
+        make.top.equalTo(self).offset(8);
+        make.left.equalTo(self).offset(20);
+        make.width.height.Ease_equalTo(@30);
     }];
     
     self.conversationToolBarBtn = [[UIButton alloc] init];
@@ -81,9 +80,9 @@
     [_conversationToolBarBtn addTarget:self action:@selector(moreButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_conversationToolBarBtn];
     [_conversationToolBarBtn Ease_makeConstraints:^(EaseConstraintMaker *make) {
-        make.top.equalTo(self).offset(10);
-        make.right.equalTo(self).offset(-16);
-        make.width.height.Ease_equalTo(kIconwidth);
+        make.top.equalTo(self).offset(8);
+        make.right.equalTo(self).offset(-21);
+        make.width.height.Ease_equalTo(30);
     }];
     
     self.emojiButton = [[UIButton alloc] init];
@@ -92,9 +91,9 @@
     [_emojiButton addTarget:self action:@selector(emoticonButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_emojiButton];
     [_emojiButton Ease_makeConstraints:^(EaseConstraintMaker *make) {
-        make.top.equalTo(self).offset(10);
-        make.right.equalTo(self.conversationToolBarBtn.ease_left).offset(-kModuleMargin);
-        make.width.height.Ease_equalTo(kIconwidth);
+        make.top.equalTo(self).offset(8);
+        make.right.equalTo(self.conversationToolBarBtn.ease_left).offset(-15);
+        make.width.height.Ease_equalTo(30);
     }];
     
     self.textView = [[EaseTextView alloc] init];
@@ -103,22 +102,23 @@
     self.textView.font = [UIFont systemFontOfSize:16];
     self.textView.textAlignment = NSTextAlignmentLeft;
     
-    self.textView.textContainerInset = UIEdgeInsetsMake(10, 10, 10, 0);
+    self.textView.textContainerInset = UIEdgeInsetsMake(8, 10, 10, 0);
     if (@available(iOS 11.1, *)) {
         self.textView.verticalScrollIndicatorInsets = UIEdgeInsetsMake(12, 20, 2, 0);
     } else {
         // Fallback on earlier versions
     }
     self.textView.returnKeyType = UIReturnKeySend;
-    self.textView.backgroundColor = [UIColor whiteColor];
-    self.textView.layer.cornerRadius = 16;
+    self.textView.backgroundColor = [UIColor colorWithHexString:@"#f2f2f2"];
+    self.textView.layer.cornerRadius = 15;
     [self addSubview:self.textView];
+    [self sendSubviewToBack:self.textView];
     [self.textView Ease_makeConstraints:^(EaseConstraintMaker *make) {
-        make.top.equalTo(self).offset(5);
+        make.top.equalTo(self).offset(8);
         make.height.Ease_equalTo(kTextViewMinHeight);
         if (_viewModel.inputBarStyle == EaseInputBarStyleAll) {
-            make.left.equalTo(self.audioButton.ease_right).offset(kModuleMargin);
-            make.right.equalTo(self.emojiButton.ease_left).offset(-kModuleMargin);
+            make.left.equalTo(self.audioButton.ease_right).offset(15);
+            make.right.equalTo(self.emojiButton.ease_right);
         }
         if (_viewModel.inputBarStyle == EaseInputBarStyleNoAudio) {
             make.left.equalTo(self).offset(16);
@@ -158,17 +158,16 @@
     [self.audioDescBtn addTarget:self action:@selector(recordButtonTouchCancelEnd) forControlEvents:UIControlEventTouchUpOutside];*/
     
     self.bottomLine = [[UIView alloc] init];
-    _bottomLine.backgroundColor = [UIColor colorWithHexString:@"#000000"];
-    _bottomLine.alpha = 0.1;
+    _bottomLine.backgroundColor = [UIColor clearColor];
     [self addSubview:self.bottomLine];
     [_bottomLine Ease_makeConstraints:^(EaseConstraintMaker *make) {
-        make.top.equalTo(self.textView.ease_bottom).offset(5);
+        make.top.equalTo(self.textView.ease_bottom).offset(8);
         make.left.equalTo(self);
         make.right.equalTo(self);
         make.height.equalTo(@0.5);
         make.bottom.equalTo(self).offset(-EMVIEWBOTTOMMARGIN);
     }];
-    self.currentMoreView.backgroundColor = [UIColor colorWithHexString:@"#f2f2f2"];
+    self.currentMoreView.backgroundColor = [UIColor colorWithHexString:@"#f8f8f8"];
 }
 
 #pragma mark - UITextViewDelegate
@@ -322,15 +321,6 @@
         self.selectedButton.selected = NO;
         self.selectedButton = nil;
     }
-    if (!self.audioButton.isSelected) {
-        [self.audioButton Ease_updateConstraints:^(EaseConstraintMaker *make) {
-            make.width.Ease_equalTo(@16);
-        }];
-    } else {
-        [self.audioButton Ease_updateConstraints:^(EaseConstraintMaker *make) {
-            make.width.Ease_equalTo(kIconwidth);
-        }];
-    }
 }
 
 #pragma mark - Action
@@ -359,15 +349,6 @@
     }
     if (aButton.selected) {
         self.selectedButton = aButton;
-    }
-    if (!self.audioButton.isSelected) {
-        [self.audioButton Ease_updateConstraints:^(EaseConstraintMaker *make) {
-            make.width.Ease_equalTo(@16);
-        }];
-    } else {
-        [self.audioButton Ease_updateConstraints:^(EaseConstraintMaker *make) {
-            make.width.Ease_equalTo(kIconwidth);
-        }];
     }
     
     return isEditing;
@@ -438,7 +419,7 @@
                 make.left.equalTo(self);
                 make.right.equalTo(self);
                 make.bottom.equalTo(self).offset(-EMVIEWBOTTOMMARGIN);
-                make.height.Ease_equalTo(@200);
+                make.height.Ease_equalTo(265);
             }];
             [self _remakeButtonsViewConstraints];
             if (self.delegate && [self.delegate respondsToSelector:@selector(chatBarDidShowMoreViewAction)]) {

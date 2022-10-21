@@ -21,6 +21,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataArray;
 @property (nonatomic, strong) NSString *moreMsgId;  //第一条消息的消息id
+
+@property (nonatomic, readonly, strong) UIButton *conversationToolBarBtn;//更多
+@property (nonatomic, readonly, strong) UIButton *emojiButton;//表情
+@property (nonatomic, readonly, strong) UIButton *audioButton;//语音
+
 @property (nonatomic) NSTimeInterval msgTimelTag;   //消息时间格式化
 
 + (EaseChatViewController *)createWithConversationId:(NSString *)aConversationId

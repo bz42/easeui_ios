@@ -967,6 +967,18 @@
 }
 
 #pragma mark - getter
+- (UIButton *)emojiButton {
+    return _chatBar.emojiButton;
+}
+
+-(UIButton *)audioButton {
+    return _chatBar.audioButton;
+}
+
+-(UIButton *)conversationToolBarBtn {
+    return _chatBar.conversationToolBarBtn;
+}
+
 - (UITableView *)tableView {
     if (!_tableView) {
         _tableView = [[UITableView alloc] init];
