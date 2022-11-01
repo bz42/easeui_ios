@@ -27,6 +27,16 @@ typedef NS_ENUM(NSInteger, EMMessageType) {
     EMMessageTypeExtAddGroup
 };
 
+typedef NS_ENUM(NSInteger, EMInputType) {
+    EMInputTypeText = 1,
+    EMInputTypeAlbumImage,
+    EMInputTypeAlbumVideo,
+    EMInputTypeCameraImage,
+    EMInputTypeCameraVideo,
+    EMInputTypeVoice,
+    EMInputTypeEmoji
+};
+
 
 NS_ASSUME_NONNULL_BEGIN
 @class EaseMessageCell;

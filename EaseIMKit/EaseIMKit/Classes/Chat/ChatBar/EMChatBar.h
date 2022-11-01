@@ -52,6 +52,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)inputViewDidChange:(EaseTextView *)aInputView;
 
+- (BOOL)chatBarShouldEnable:(EMInputType)inputType;
+
 - (void)chatBarDidShowMoreViewAction;
 
 - (void)chatBarSendMsgAction:(NSString *)text;

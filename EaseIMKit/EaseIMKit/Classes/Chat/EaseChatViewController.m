@@ -369,6 +369,13 @@
     [self performSelector:@selector(scrollToBottomRow) withObject:nil afterDelay:0.1];
 }
 
+- (BOOL)chatBarShouldEnable:(EMInputType )inputType {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(chatBarShouldEnable:)]) {
+        return [self.delegate chatBarShouldEnable: inputType];
+    }
+    return NO;
+}
+
 #pragma mark - EMChatBarRecordAudioViewDelegate
 
 - (void)chatBarRecordAudioViewStopRecord:(NSString *)aPath

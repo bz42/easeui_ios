@@ -360,7 +360,14 @@
     if([self _buttonAction:aButton]) {
         return;
     }
-
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(chatBarShouldEnable:)]) {
+        BOOL enable = [self.delegate chatBarShouldEnable: EMInputTypeVoice];
+        if (!enable) {
+            return;
+        }
+    }
+    
     if (aButton.selected) {
         if (self.recordAudioView) {
             self.currentMoreView = self.recordAudioView;
@@ -385,6 +392,14 @@
     if([self _buttonAction:aButton]) {
         return;
     }
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(chatBarShouldEnable:)]) {
+        BOOL enable = [self.delegate chatBarShouldEnable: EMInputTypeEmoji];
+        if (!enable) {
+            return;
+        }
+    }
+    
     if (aButton.selected) {
         if (self.moreEmoticonView) {
             self.currentMoreView = self.moreEmoticonView;

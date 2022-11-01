@@ -142,6 +142,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)loadMoreMessageData:(NSString *)firstMessageId currentMessageList:(NSArray<EMChatMessage *> *)messageList;
 
+- (BOOL)chatBarShouldEnable:(EMInputType)inputType;
 @end
 
 NS_ASSUME_NONNULL_END

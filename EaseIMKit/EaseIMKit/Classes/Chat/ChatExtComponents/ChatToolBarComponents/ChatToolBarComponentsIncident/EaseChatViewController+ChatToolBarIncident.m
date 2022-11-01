@@ -27,6 +27,7 @@ static const void *imagePickerKey = &imagePickerKey;
 
 - (void)chatToolBarComponentIncidentAction:(EMChatToolBarComponentType)componentType
 {
+    
     [self.view endEditing:YES];
     [self setterImagePicker];
 
