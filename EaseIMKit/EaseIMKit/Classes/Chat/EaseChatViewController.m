@@ -711,10 +711,11 @@
     CGFloat keyBoardHeight = keyBoardBounds.size.height;
     
     // 定义好动作
+    [self.chatBar Ease_updateConstraints:^(EaseConstraintMaker *make) {
+        make.bottom.equalTo(self.view).offset(-keyBoardHeight);
+    }];
     void (^animation)(void) = ^void(void) {
-        [self.chatBar Ease_updateConstraints:^(EaseConstraintMaker *make) {
-            make.bottom.equalTo(self.view).offset(-keyBoardHeight);
-        }];
+        [self.view layoutIfNeeded];
     };
     [self keyBoardWillShow:note animations:animation completion:^(BOOL finished, CGRect keyBoardBounds) {
         if (finished) {
