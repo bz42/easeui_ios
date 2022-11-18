@@ -11,6 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UIImage (EaseUI)
 + (UIImage *)easeUIImageNamed:(NSString *)name;
++ (UIImage *)easeBundleImageNamed:(NSString *)name bundle: (NSString *)bundle;
 @end
 
 NS_ASSUME_NONNULL_END

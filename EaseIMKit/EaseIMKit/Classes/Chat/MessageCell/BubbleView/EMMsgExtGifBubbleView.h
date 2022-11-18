@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) EaseAnimatedImgView *gifView;
 
+@property (nonatomic, strong) UIImageView *imgView;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -54,6 +54,8 @@ typedef NS_ENUM(NSUInteger, EMEmotionType) {
 
 + (instancetype)getGifGroup;
 
++ (instancetype)getShakenGroup;
+
 @end
 
 @interface EMEmoticonCell : UICollectionViewCell

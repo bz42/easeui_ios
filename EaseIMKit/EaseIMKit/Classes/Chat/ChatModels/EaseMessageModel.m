@@ -21,7 +21,12 @@
         _type = (EMMessageType)aMsg.body.type;
         if (aMsg.body.type == EMMessageBodyTypeText) {
             if ([aMsg.ext objectForKey:MSG_EXT_GIF]) {
-                _type = EMMessageTypeExtGif;
+                BOOL isGif = [[aMsg.ext objectForKey:MSG_EXT_GIF] boolValue];
+                if(isGif) {
+                    _type = EMMessageTypeExtGif;
+                } else {
+                    _type = EMMessageTypeExtCodeImage;
+                }
                 return self;
             }
             if ([aMsg.ext objectForKey:MSG_EXT_RECALL]) {

@@ -407,6 +407,11 @@
         NSDictionary *ext = @{MSG_EXT_GIF:@(YES), MSG_EXT_GIF_ID:aModel.eId};
         [self sendTextAction:aModel.name ext:ext];
     }
+    
+    if (aModel.type == EMEmotionTypePng) {
+        NSDictionary *ext = @{MSG_EXT_GIF:@(NO), MSG_EXT_GIF_ID:aModel.eId};
+        [self sendTextAction:aModel.eId ext:ext];
+    }
 }
 
 - (void)didChatBarEmoticonViewSendAction

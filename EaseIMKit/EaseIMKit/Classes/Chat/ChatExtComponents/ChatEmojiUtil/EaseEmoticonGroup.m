@@ -12,6 +12,7 @@
 #import "HorizontalLayout.h"
 
 EaseEmoticonGroup *gGifGroup = nil;
+EaseEmoticonGroup *shakenGroup = nil;
 
 @implementation EaseEmoticonModel
 
@@ -71,6 +72,52 @@ EaseEmoticonGroup *gGifGroup = nil;
     return gGifGroup;
 }
 
++ (instancetype)getShakenGroup
+{
+    if (shakenGroup) {
+        return shakenGroup;
+    }
+    
+    NSMutableArray *models2 = [[NSMutableArray alloc] init];
+    NSArray *names = @[@"e00f00m00",
+                       @"e00f00m01",
+                       @"e00f00m02",
+                       @"e00f00m03",
+                       @"e00f00m04",
+                       @"e00f02m02",
+                       @"e00f02m03",
+                       @"e00f03m03",
+                       @"e00f04m02",
+                       @"e03f00m04",
+                       @"e03f01m03",
+                       @"e03f03m01",
+                       @"e03f04m02",
+                       @"e04f01m01",
+                       @"e04f01m02",
+                       @"e04f01m03",
+                       @"e04f02m02",
+                       @"e04f02m03",
+                       @"e04f05m01",
+                       @"e06f01m01",
+                       @"e06f01m03",
+                       @"e06f06m01",
+                       @"e07f00m01",
+                       @"e07f00m03",
+                       @"e08f00m02",
+                       @"e08f03m02",
+                       @"e08f03m03"];
+    for (NSString *name in names) {
+        EaseEmoticonModel *model = [[EaseEmoticonModel alloc] initWithType:EMEmotionTypePng];
+        model.eId = [NSString stringWithFormat:@"sk1_%@", name];
+        model.name = @"ShakenFace";
+        model.imgName = [NSString stringWithFormat:@"sk1_%@", name];
+        model.original = [NSString stringWithFormat:@"sk1_%@", name];
+        [models2 addObject:model];
+    }
+    shakenGroup = [[EaseEmoticonGroup alloc] initWithType:EMEmotionTypePng dataArray:models2 icon:[UIImage easeBundleImageNamed:@"sk1_e00f00m00" bundle:@"ShakenFace"] rowCount:2 colCount:4];
+    return shakenGroup;
+}
+
 @end
 
 
@@ -120,11 +167,17 @@ EaseEmoticonGroup *gGifGroup = nil;
     
     if (model.type == EMEmotionTypeEmoji) {
         self.label.font = [UIFont fontWithName:@"AppleColorEmoji" size:29.0];
-    }
-    self.label.text = model.name;
-    
-    if ([model.imgName length] > 0) {
-        self.imgView.image = [UIImage easeUIImageNamed:model.imgName];
+        self.label.text = model.name;
+    } else if (model.type == EMEmotionTypeGif) {
+        self.label.text = model.name;
+        
+        if ([model.imgName length] > 0) {
+            self.imgView.image = [UIImage easeUIImageNamed:model.imgName];
+        }
+    } else if (model.type == EMEmotionTypePng) {
+        if ([model.imgName length] > 0) {
+            self.imgView.image = [UIImage easeBundleImageNamed:model.imgName bundle:model.name];
+        }
     }
 }
 

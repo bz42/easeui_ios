@@ -90,6 +90,8 @@
         identifier = [NSString stringWithFormat:@"%@File", identifier];
     } else if (aType == EMMessageTypeExtGif) {
         identifier = [NSString stringWithFormat:@"%@ExtGif", identifier];
+    } else if (aType == EMMessageTypeExtCodeImage) {
+        identifier = [NSString stringWithFormat:@"%@ExtGif", identifier];
     } else if (aType == EMMessageTypeCustom) {
         identifier = [NSString stringWithFormat:@"%@Custom", identifier];
     }
@@ -248,6 +250,9 @@
             bubbleView = [[EMMsgFileBubbleView alloc] initWithDirection:self.direction type:aType viewModel:_viewModel];
             break;
         case EMMessageTypeExtGif:
+            bubbleView = [[EMMsgExtGifBubbleView alloc] initWithDirection:self.direction type:aType viewModel:_viewModel];
+            break;
+        case EMMessageTypeExtCodeImage:
             bubbleView = [[EMMsgExtGifBubbleView alloc] initWithDirection:self.direction type:aType viewModel:_viewModel];
             break;
         case EMMessageTypeCustom:

@@ -10,7 +10,11 @@
 
 @implementation UIImage (EaseUI)
 + (UIImage *)easeUIImageNamed:(NSString *)name {
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"EaseIMKit" ofType:@"bundle"];
+    return [UIImage easeBundleImageNamed:name bundle:@"EaseIMKit"];
+}
+
++ (UIImage *)easeBundleImageNamed:(NSString *)name bundle: (NSString *)bundle {
+    NSString *path = [[NSBundle mainBundle] pathForResource:bundle ofType:@"bundle"];
     NSString *imagePath = [path stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png",name]];
     return [UIImage imageWithContentsOfFile:imagePath];
 }
