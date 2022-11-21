@@ -44,6 +44,15 @@ EaseEmoticonGroup *shakenGroup = nil;
         _icon = aIcon;
         _rowCount = aRowCount;
         _colCount = aColCount;
+        switch (aType) {
+        case EMEmotionTypeEmoji:
+            _pageCount = 19;
+            break;
+        case EMEmotionTypePng:
+        case EMEmotionTypeGif:
+            _pageCount = aRowCount * aColCount;
+            break;
+        }
     }
     
     return self;
@@ -133,6 +142,11 @@ EaseEmoticonGroup *shakenGroup = nil;
     return self;
 }
 
+-(void)prepareForReuse {
+    self.imgView.image = nil;
+    self.label.text = nil;
+}
+
 #pragma mark - Subviews
 
 - (void)_setupSubviews
@@ -175,9 +189,7 @@ EaseEmoticonGroup *shakenGroup = nil;
             self.imgView.image = [UIImage easeUIImageNamed:model.imgName];
         }
     } else if (model.type == EMEmotionTypePng) {
-        if ([model.imgName length] > 0) {
-            self.imgView.image = [UIImage easeBundleImageNamed:model.imgName bundle:model.name];
-        }
+        self.imgView.image = [UIImage easeBundleImageNamed:model.imgName bundle:model.name];
     }
 }
 
@@ -246,31 +258,32 @@ EaseEmoticonGroup *shakenGroup = nil;
 #pragma mark - UICollectionViewDataSource
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    if ([self.emotionGroup.dataArray count] < 19) {
+    NSInteger pageCount = self.emotionGroup.pageCount;
+    if ([self.emotionGroup.dataArray count] < pageCount) {
         return 1;
     }
-    if ([self.emotionGroup.dataArray count] % 19 == 0) {
-        return [self.emotionGroup.dataArray count] / 19;
+    if ([self.emotionGroup.dataArray count] % pageCount == 0) {
+        return [self.emotionGroup.dataArray count] / pageCount;
     }
-    return [self.emotionGroup.dataArray count] / 19 + 1;
+    return [self.emotionGroup.dataArray count] / pageCount + 1;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    if ([self.emotionGroup.dataArray count] < 19) {
+    if ([self.emotionGroup.dataArray count] < self.emotionGroup.pageCount) {
         return [self.emotionGroup.dataArray count];
     }
-    return 19;
+    return self.emotionGroup.pageCount;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     EMEmoticonCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"EMEmoticonCell" forIndexPath:indexPath];
-    long count = indexPath.section * 19 + indexPath.row;
+    long count = indexPath.section * self.emotionGroup.pageCount + indexPath.row;
     if (count >= [self.emotionGroup.dataArray count]) {
         cell.model = [[EaseEmoticonModel alloc]initWithType:EMEmotionTypeEmoji];
         return cell;
     }
-    cell.model = self.emotionGroup.dataArray[indexPath.section * 19 + indexPath.row];
+    cell.model = self.emotionGroup.dataArray[indexPath.section * self.emotionGroup.pageCount + indexPath.row];
     return cell;
 }
 

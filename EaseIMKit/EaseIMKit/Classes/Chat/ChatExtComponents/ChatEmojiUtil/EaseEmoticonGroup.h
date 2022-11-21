@@ -46,6 +46,8 @@ typedef NS_ENUM(NSUInteger, EMEmotionType) {
 
 @property (nonatomic) NSInteger colCount;
 
+@property (nonatomic, readonly) NSInteger pageCount;
+
 - (instancetype)initWithType:(EMEmotionType)aType
                    dataArray:(NSArray<EaseEmoticonModel *> *)aDataArray
                         icon:(id)aIcon
