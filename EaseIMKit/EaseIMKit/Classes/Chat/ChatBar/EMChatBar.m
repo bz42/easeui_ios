@@ -393,15 +393,15 @@
 //表情
 - (void)emoticonButtonAction:(UIButton *)aButton
 {
-    if([self _buttonAction:aButton]) {
-        return;
-    }
-    
     if (self.delegate && [self.delegate respondsToSelector:@selector(chatBarShouldEnable:)]) {
         BOOL enable = [self.delegate chatBarShouldEnable: EMInputTypeEmoji];
         if (!enable) {
             return;
         }
+    }
+
+    if([self _buttonAction:aButton]) {
+        return;
     }
     
     if (aButton.selected) {
